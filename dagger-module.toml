@@ -1,4 +1,4 @@
-name = "tus-compliance-tests"
+name = "tus-conformance-tests"
 engineVersion = "v1.0.0"
 runtime.source = "dang"
 include = ["!.devenv", "!results"]

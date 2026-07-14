@@ -3,5 +3,5 @@ engineVersion = "v1.0.0"
 runtime.source = "dang"
 
 [[dependencies]]
-name = "tus-compliance-tests"
+name = "tus-conformance-tests"
 source = "../../.."

@@ -1,5 +1,5 @@
 #!/bin/bash
-# tus Protocol Compliance Test Runner
+# tus Protocol Conformance Test Runner
 # Usage: ./run-tests.sh [options] <category>
 
 set -e
@@ -23,7 +23,7 @@ NC='\033[0m' # No Color
 
 print_usage() {
     cat << EOF
-tus Protocol Compliance Test Runner
+tus Protocol Conformance Test Runner
 
 USAGE:
     ./run-tests.sh [OPTIONS] <CATEGORY>

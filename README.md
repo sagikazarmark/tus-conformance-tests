@@ -1,4 +1,4 @@
-# [tus](https://tus.io) Protocol Compliance Test Suite
+# [tus](https://tus.io) Protocol Conformance Test Suite
 
 A comprehensive test suite for validating tus resumable upload protocol v1.0.0 server implementations.
 

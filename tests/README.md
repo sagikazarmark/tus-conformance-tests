@@ -1,19 +1,19 @@
-# tus Protocol Compliance Test Suite Specification
+# tus Protocol Conformance Test Suite Specification
 
 ## Overview
 
 A comprehensive test suite for validating server implementations against the tus resumable upload protocol.
 
 **Scope:**
-- Server compliance testing (single implementation)
-- Functional compliance tests (atomic + scenario-based)
+- Server conformance testing (single implementation)
+- Functional conformance tests (atomic + scenario-based)
 - Modular extension support (manual config or auto-discovery via OPTIONS)
 - Configurable authentication hooks
 - Stress tests specified separately
 
 ## Protocol Reference
 
-This test suite validates compliance with:
+This test suite validates conformance to:
 - **Official Protocol**: https://tus.io/protocols/resumable-upload
 - **Protocol Version**: 1.0.0 (released 2016-03-25)
 - **OpenAPI Spec**: https://github.com/tus/tus-resumable-upload-protocol/blob/main/OpenAPI/openapi3.yaml
@@ -75,7 +75,7 @@ dagger call tests run --extension CREATION --extension CHECKSUM sync
 dagger call tests run --extension CREATION --server TUSD sync
 ```
 
-### Compliance Levels
+### Conformance Levels
 
 | Level | Requirements |
 |-------|--------------|

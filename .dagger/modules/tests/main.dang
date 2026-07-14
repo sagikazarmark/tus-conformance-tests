@@ -1,6 +1,6 @@
 type Tests {
   """
-  Run the compliance test suite against the supported servers.
+  Run the conformance test suite against the supported servers.
   """
   run(
     """
@@ -23,7 +23,7 @@ type Tests {
     servers.reduce(Dagger.directory) { results, server =>
       results.withDirectory(
         toString(server).toLower,
-        Dagger.tusComplianceTests.test(
+        Dagger.tusConformanceTests.test(
           service: self.service(server),
           extensions: extensions.map { self.mapExtension(_) },
           disableCore: disableCore,
@@ -32,17 +32,17 @@ type Tests {
     }
   }
 
-  let mapExtension(extension: Extension!): TusComplianceTestsExtension! {
+  let mapExtension(extension: Extension!): TusConformanceTestsExtension! {
       case (extension) {
-        Extension.CHECKSUM => TusComplianceTestsExtension.CHECKSUM
-        Extension.CHECKSUM_TRAILER => TusComplianceTestsExtension.CHECKSUM_TRAILER
-        Extension.CONCATENATION => TusComplianceTestsExtension.CONCATENATION
-        Extension.CONCATENATION_UNFINISHED => TusComplianceTestsExtension.CONCATENATION_UNFINISHED
-        Extension.CREATION => TusComplianceTestsExtension.CREATION
-        Extension.CREATION_DEFER_LENGTH => TusComplianceTestsExtension.CREATION_DEFER_LENGTH
-        Extension.CREATION_WITH_UPLOAD => TusComplianceTestsExtension.CREATION_WITH_UPLOAD
-        Extension.EXPIRATION => TusComplianceTestsExtension.EXPIRATION
-        Extension.TERMINATION => TusComplianceTestsExtension.TERMINATION
+        Extension.CHECKSUM => TusConformanceTestsExtension.CHECKSUM
+        Extension.CHECKSUM_TRAILER => TusConformanceTestsExtension.CHECKSUM_TRAILER
+        Extension.CONCATENATION => TusConformanceTestsExtension.CONCATENATION
+        Extension.CONCATENATION_UNFINISHED => TusConformanceTestsExtension.CONCATENATION_UNFINISHED
+        Extension.CREATION => TusConformanceTestsExtension.CREATION
+        Extension.CREATION_DEFER_LENGTH => TusConformanceTestsExtension.CREATION_DEFER_LENGTH
+        Extension.CREATION_WITH_UPLOAD => TusConformanceTestsExtension.CREATION_WITH_UPLOAD
+        Extension.EXPIRATION => TusConformanceTestsExtension.EXPIRATION
+        Extension.TERMINATION => TusConformanceTestsExtension.TERMINATION
         else => raise "unknown extension: " + toString(extension)
       }
   }

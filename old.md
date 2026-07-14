@@ -76,7 +76,7 @@ EOF
 
 **tus-node-server Extensions:** creation, creation-with-upload, creation-defer-length, termination, expiration
 
-### Comparing Server Compliance
+### Comparing Server Conformance
 
 Run the test suite against each server and compare results:
 
@@ -218,7 +218,7 @@ The test suite includes a `compose.yaml` file to run multiple tus server impleme
 
 ### Core Protocol (`core/`)
 
-Required tests for basic tus compliance:
+Required tests for basic tus conformance:
 
 | Category | Tests | Description |
 |----------|-------|-------------|
@@ -256,7 +256,7 @@ End-to-end workflow tests:
 
 ### Optional (`optional/`)
 
-Tests for undefined specification behavior. Failures here indicate deviation from suggested best practices but don't affect protocol compliance:
+Tests for undefined specification behavior. Failures here indicate deviation from suggested best practices but don't affect protocol conformance:
 
 | Category | Tests | Description |
 |----------|-------|-------------|
@@ -285,7 +285,7 @@ Tests use deterministic test data for reproducibility:
 ### Binary Content
 Checksum tests use precomputed hashes for verification.
 
-## Compliance Levels
+## Conformance Levels
 
 | Level | Requirements |
 |-------|--------------|

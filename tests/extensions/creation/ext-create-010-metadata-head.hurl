@@ -5,7 +5,7 @@
 #        the Client during the creation."
 # Note: precondition is that the server stored the metadata. Servers that
 # explicitly discard metadata would legitimately omit the header on HEAD,
-# though a compliance target should store and echo it.
+# though a conformance target should store and echo it.
 
 POST {{base_url}}
 Tus-Resumable: {{tus_version}}

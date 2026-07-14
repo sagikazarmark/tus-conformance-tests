@@ -1,4 +1,4 @@
-type TusComplianceTests {
+type TusConformanceTests {
   let tests: Directory! = Dagger.currentModule.source.directory("tests")
 
   """
