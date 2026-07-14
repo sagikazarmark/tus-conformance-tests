@@ -1,0 +1,4 @@
+ignore = [".devenv", "results"]
+
+[modules.tests]
+source = ".dagger/modules/tests"

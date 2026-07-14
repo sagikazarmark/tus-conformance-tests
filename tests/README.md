@@ -56,23 +56,23 @@ Each extension directory contains all tests for that extension:
 
 ## Running Tests
 
-Use the `scope` parameter to run specific test suites:
+Use the `extension` and `disable-core` parameters to select test suites:
 
 ```bash
 # Run all tests
-dagger call run
+dagger call tests run sync
 
-# Run only core protocol tests
-dagger call run --scope=core
+# Run core protocol and creation extension tests
+dagger call tests run --extension CREATION sync
 
 # Run only creation extension tests
-dagger call run --scope=creation
+dagger call tests run --extension CREATION --disable-core sync
 
-# Run multiple scopes
-dagger call run --scope=core --scope=creation --scope=checksum
+# Run multiple extensions in addition to core
+dagger call tests run --extension CREATION --extension CHECKSUM sync
 
 # Run against a specific server
-dagger call run --scope=creation --server=TUSD
+dagger call tests run --extension CREATION --server TUSD sync
 ```
 
 ### Compliance Levels

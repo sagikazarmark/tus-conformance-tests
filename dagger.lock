@@ -1,0 +1,5 @@
+[["version","1"]]
+["","container.from",["docker.io/s3rius/rustus:latest","linux/amd64"],"sha256:abaee862e933ec07ce9723fa6afa4bd0481983d66cbeea9c14b6b33a1404a16c","pin"]
+["","container.from",["docker.io/tusproject/tusd:latest","linux/arm64"],"sha256:9610f0f8edf4cceeb26f1b3ac9fa4bb4803d61a878e222c1573cda63c9e23374","pin"]
+["","container.from",["ghcr.io/orange-opensource/hurl:latest","linux/arm64"],"sha256:d7727dcc0166de8aea88916e73ea435ee09bfecb8ba0c281200206b6cf37cf64","pin"]
+["","git.head",["https://github.com/sagikazarmark/daggerverse-beta"],"2c069e9ebbe703e515e0203064396c469f3a9f79","float"]

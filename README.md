@@ -20,7 +20,7 @@ The [test suite](tests/) includes:
 
 ### The easy way
 
-- [Dagger](https://dagger.io)
+- [Dagger](https://dagger.io) using beta release `86d1d2f5791bcf3213d56903cfa81a3ba0abe54a`
 
 ### The hard way
 
@@ -29,18 +29,18 @@ The [test suite](tests/) includes:
 - Docker and Docker Compose (optional, for running test servers)
 
 > [!TIP]
-> If you use [devenv](https://devenv.sh) or [mise](https://mise.jdx.dev), you can easily set up the required tools.
+> [devenv](https://devenv.sh) and [mise](https://mise.jdx.dev) configure the required Dagger beta release. Otherwise, set `DAGGER_X_RELEASE=86d1d2f5791bcf3213d56903cfa81a3ba0abe54a` before running Dagger.
 
 ## Quick Start
 
-2. **Run all tests**
+1. **Run all tests**
    ```bash
-   dagger call run
+   dagger call tests run sync
    ```
 
-3. **Export HTML report**
+2. **Export HTML report**
    ```bash
-   dagger call run --report html export --path results
+   dagger call tests run --report HTML export --path results
    ```
 
 ## References

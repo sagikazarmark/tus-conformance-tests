@@ -1,0 +1,104 @@
+type Tests {
+  """
+  Run the compliance test suite against the supported servers.
+  """
+  run(
+    """
+    Servers to run the test suite against.
+    """
+    servers: [Server!]! = Server.values,
+    """
+    Extensions to test.
+    """
+    extensions: [Extension!]! = Extension.values,
+    """
+    Disable core tests.
+    """
+    disableCore: Boolean! = false,
+  ): Directory! @check {
+    if (servers.length == 0) {
+      raise "no servers selected"
+    }
+
+    servers.reduce(Dagger.directory) { results, server =>
+      results.withDirectory(
+        toString(server).toLower,
+        Dagger.tusComplianceTests.test(
+          service: self.service(server),
+          extensions: extensions.map { self.mapExtension(_) },
+          disableCore: disableCore,
+        ),
+      )
+    }
+  }
+
+  let mapExtension(extension: Extension!): TusComplianceTestsExtension! {
+      case (extension) {
+        Extension.CHECKSUM => TusComplianceTestsExtension.CHECKSUM
+        Extension.CHECKSUM_TRAILER => TusComplianceTestsExtension.CHECKSUM_TRAILER
+        Extension.CONCATENATION => TusComplianceTestsExtension.CONCATENATION
+        Extension.CONCATENATION_UNFINISHED => TusComplianceTestsExtension.CONCATENATION_UNFINISHED
+        Extension.CREATION => TusComplianceTestsExtension.CREATION
+        Extension.CREATION_DEFER_LENGTH => TusComplianceTestsExtension.CREATION_DEFER_LENGTH
+        Extension.CREATION_WITH_UPLOAD => TusComplianceTestsExtension.CREATION_WITH_UPLOAD
+        Extension.EXPIRATION => TusComplianceTestsExtension.EXPIRATION
+        Extension.TERMINATION => TusComplianceTestsExtension.TERMINATION
+        else => raise "unknown extension: " + toString(extension)
+      }
+  }
+
+  let service(server: Server!): Service! {
+      case (server) {
+        Server.TUSD => Dagger
+          .container
+          .from("tusproject/tusd:latest")
+          .withExposedPort(8080)
+          .asService(["-verbose", "-max-size=1073741824"], useEntrypoint: true)
+
+        Server.RUSTUS => Dagger
+          .container(platform: "linux/amd64")
+          .from("s3rius/rustus:latest")
+          .withEnvVariable("RUSTUS_SERVER_HOST", "0.0.0.0")
+          .withEnvVariable("RUSTUS_SERVER_PORT", "8080")
+          .withEnvVariable("RUSTUS_URL", "/files")
+          .withEnvVariable("RUSTUS_MAX_BODY_SIZE", "1073741824")
+          .withEnvVariable("RUSTUS_STORAGE", "file-storage")
+          .withEnvVariable("RUSTUS_DATA_DIR", "/data")
+          .withEnvVariable("RUSTUS_DIR_STRUCTURE", "flat")
+          .withEnvVariable("RUSTUS_EXTENSIONS", "getting,creation,termination,creation-with-upload,creation-defer-length,concatenation,checksum")
+          .withEnvVariable("RUSTUS_INFO_STORAGE", "file-info-storage")
+          .withEnvVariable("RUSTUS_INFO_DIR", "/data/info")
+          .withMountedCache("/data", Dagger.cacheVolume("rustus"))
+          .withExposedPort(8080)
+          .asService
+
+        Server.TUS_NODE_SERVER => Dagger
+          .currentModule
+          .source
+          .directory("servers")
+          .dockerBuild(dockerfile: "Dockerfile.tus-node-server")
+          .withExposedPort(8080)
+          .asService
+
+          else => raise "unknown server: " + toString(server)
+      }
+  }
+}
+
+enum Server {
+  TUSD
+  RUSTUS
+  TUS_NODE_SERVER
+}
+
+enum Extension {
+  CHECKSUM
+  CHECKSUM_TRAILER
+  CONCATENATION
+  CONCATENATION_UNFINISHED
+  CREATION
+  CREATION_DEFER_LENGTH
+  CREATION_WITH_UPLOAD
+  EXPIRATION
+  TERMINATION
+}

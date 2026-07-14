@@ -1,10 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
+  dagger.enable = true;
+  env.DAGGER_X_RELEASE = "86d1d2f5791bcf3213d56903cfa81a3ba0abe54a";
+
   packages = [
     pkgs.hurl
-
-    inputs.dagger.packages.${pkgs.stdenv.hostPlatform.system}.dagger
 
     # To manage mise environment
     pkgs.mise
