@@ -27,7 +27,7 @@ type Tests {
           service: self.service(server),
           extensions: extensions.map { self.mapExtension(_) },
           disableCore: disableCore,
-        ),
+        ).output,
       )
     }
   }

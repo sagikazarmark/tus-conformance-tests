@@ -17,7 +17,7 @@ type TusConformanceTests {
     Disable core tests.
     """
     disableCore: Boolean! = false,
-  ): Directory! {
+  ): Result! {
     let globs: [String!]! = []
 
     # Always run core tests (unless disabled)
@@ -53,7 +53,26 @@ type TusConformanceTests {
         verbosity: HurlVerbosity.VERBOSE,
       )
 
-    result.outputDirectory
+    Result(result.outputDirectory, result.exitCode)
+  }
+}
+
+type Result {
+  let outputDirectory: Directory!
+  let code: Int!
+
+  """
+  Test output directory.
+  """
+  output: Directory! {
+    self.outputDirectory
+  }
+
+  """
+  Test exit code.
+  """
+  exitCode: Int! {
+    self.code
   }
 }
 
